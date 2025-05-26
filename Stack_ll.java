@@ -1,4 +1,4 @@
-
+import java.util.Scanner;
 
 public class Stack_ll {
     static class Node{
@@ -40,21 +40,89 @@ public class Stack_ll {
             }
             return head.data;
         }
+        public static void search(int num){
+            Node temp = head;
+            int index = 1;
+            while(temp != null){
+                if(temp.data == num){
+                    System.out.println(" The number " + num + " found at " + index + " index");
+                    return;
+                }
+                temp = temp.next;
+                index++;
+            }
+            System.out.println(" The number " + num + " not found ");
+        }
+        public static void display(){
+            if(isEmpty()){
+                System.out.println(" Stack is empty ");
+                return;
+            }
+            Node temp = head;
+            System.out.println(" Stack :");
+            while(temp != null){
+                System.out.println(temp.data);
+                temp = temp.next;
+            }
 
         }
+
+    }
     public static void main(String[] args) {
-        stack s= new stack();
-        s.push(1);
-        s.push(2);
-        s.push(3);
-        s.push(4);
+        stack s = new stack();
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do{
+            System.out.println("\n--- Stack Menu ---");
+            System.out.println("1. Push");
+            System.out.println("2. Pop");
+            System.out.println("3. Peek");
+            System.out.println("4. Display");
+            System.out.println("5. Search");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
 
-        while(!s.isEmpty()){
-            System.out.println(s.peek());
-            s.pop();
-        }
+            switch (choice){
+                case 1:
+                    System.out.println(" Enter the value to push ");
+                    int val = sc.nextInt();
+                    s.push(val);
+                    break;
+                case 2:
+                    int popped = s.pop();
+                    if(popped != -1){
+                        System.out.println(" Popped the element " + popped);
+                        break;
+                    }
+                case 3:
+                    int top = s.peek();
+                    if(top != -1){
+                        System.out.println(" The top element is " + top);
+                        break;
+                    }
+                case 4:
+                    s.display();
+                    break;
+                case 5:
+                    System.out.println(" Enter the element to search ");
+                    int elem = sc.nextInt();
+                    s.search(elem);
+                    break;
+                case 6:
+                    System.out.println(" Exiting....");
+                    break;
+                default:
+                    System.out.println(" Invalid choice, try again ");
+            }
+
+
+        }            while (choice !=6);
+
     }
 
 
 }
+
+
 
